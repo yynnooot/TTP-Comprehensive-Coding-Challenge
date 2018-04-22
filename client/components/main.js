@@ -9,7 +9,7 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>Main Component</h1>
+      <h1>My Calendar App</h1>
       
       <hr />
     </div>

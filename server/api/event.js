@@ -18,6 +18,7 @@ router.post('/', (req, res, next) => {
     .catch(next)
 })
 
+// update single event with :id
 router.put('/:id', (req, res, next) => {
   Event.findById(req.params.id)
     .then(event => event.update(req.body))
@@ -25,6 +26,7 @@ router.put('/:id', (req, res, next) => {
     .catch(next)
 })
 
+// delete single event with :id
 router.delete('/:id', (req, res, next) => {
   Event.destroy({
     where: {

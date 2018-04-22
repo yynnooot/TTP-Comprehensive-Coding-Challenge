@@ -17,11 +17,12 @@ class Routes extends Component {
   render () {
     return (
       <Router history={history}>
-        <Main>
+        <div>
+          <Main/>
           <Switch>
-            <Route path="/" component={UserHome} />  
+            <Route exact path="/" component={UserHome}/>  
           </Switch>
-        </Main>
+        </div>
       </Router>
     )
   }
