@@ -1,19 +1,38 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-
-import Form from './Form';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import moment from 'moment';
 
 import Month from './Month';
 
-export const UserHome = (props) => {
+class UserHome extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      timeContext: moment()
+    }
+  }  
 
-  return (
-    <div>
-      <h3>UserHome Component</h3>
-      <Month />
-    </div>
-  )
+  incrementMonth = () => {
+    let newContext = moment(this.state.timeContext).add(1,"month")
+    this.setState({timeContext: newContext})
+  }
+  decrementMonth = () => {
+    let newContext = moment(this.state.timeContext).subtract(1,"month")
+    this.setState({timeContext: newContext})
+  }
+  render(){
+    let currentMonth = this.state.timeContext.format("MMMM");
+    let currentYear = this.state.timeContext.format("Y");
+    return (
+      <div>
+        <h3>{currentMonth} {currentYear}</h3>
+        <button onClick={()=>this.incrementMonth()}>add</button>
+        <button onClick={()=>this.decrementMonth()}>subtract</button>
+        <Month/>
+      </div>
+    )
+  }
 }
 
 /**

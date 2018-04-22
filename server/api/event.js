@@ -33,10 +33,10 @@ router.delete('/:id', (req, res, next) => {
       id: req.params.id
     }
   })
-    .then(() => Event.findAll()
-      .then(events => res.json(events))
-      .catch(next)
-    )
+  .then(() => Event.findAll()
+    .then(events => res.json(events))
     .catch(next)
+  )
+  .catch(next)
 })
 
