@@ -21,7 +21,7 @@ class Day extends Component {
   render(){
     return (
       <div>
-        <h3>DAY COMPONENT</h3>
+        <h3>{this.props.num}</h3>
         { this.props.allEvents && this.props.allEvents.map((itemObj,index) => {
             return (
               <SingleEvent key={index} event={itemObj}/>

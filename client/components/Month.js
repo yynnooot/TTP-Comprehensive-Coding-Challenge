@@ -28,28 +28,26 @@ class Month extends Component {
     for(let i=1; i<=daysInMonth; i++){
       daysArray.push(i)
     }
-    console.log("days array:", daysArray)
     return daysArray;
   }
 
-  createRows = (daysArray) => {
-    let arrToMap = [];
+  setupRows = (daysArray) => {
+    let arrOfRows = [];
     let row = [];
 
     for(let i=0;i<daysArray.length;i++){
       if(i !== 0 && i%7 === 0){
-        arrToMap.push(row);
+        arrOfRows.push(row);
         row = []
-        row.push(<td>{daysArray[i]}</td>)
+        row.push(<td><Day num={daysArray[i]}/></td>)
       } else if(i === daysArray.length-1){
-        row.push(<td>{daysArray[i]}</td>)
-        arrToMap.push(row);
+        row.push(<td><Day num={daysArray[i]}/></td>)
+        arrOfRows.push(row);
       } else {
-        row.push(<td>{daysArray[i]}</td>)
+        row.push(<td><Day num={daysArray[i]}/></td>)
       }  
     }
-    console.log('arrtomap',arrToMap)
-    return arrToMap
+    return arrOfRows
   }
 
 
@@ -62,7 +60,7 @@ class Month extends Component {
     // console.log("todayNum:",this.todayNum)
     // console.log("today date:",this.todayDate)
     const daysArray = this.getDaysToMap(emptyDays,daysInMonth)
-    const mapRows = this.createRows(daysArray)
+    const rowsArray = this.setupRows(daysArray)
     return (
       <div>
         <table>
@@ -77,8 +75,8 @@ class Month extends Component {
                 return <td className='weekday-name box' key={idx}>{day}</td>
               })}
             </tr>
-            {mapRows.map((row,i)=>{
-              return (<tr key={i}>{row}</tr>)
+            {rowsArray.map((row,idx)=>{
+              return (<tr key={idx}>{row}</tr>)
             })}
           </tbody>
         </table>

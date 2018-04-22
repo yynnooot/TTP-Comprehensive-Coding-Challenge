@@ -29,8 +29,8 @@ class UserHome extends Component {
     return (
       <div>
         <h3>{month} {year}</h3>
-        <button onClick={()=>this.incrementMonth()}>add</button>
-        <button onClick={()=>this.decrementMonth()}>subtract</button>
+        <button onClick={()=>this.decrementMonth()}>&larr;</button>
+        <button onClick={()=>this.incrementMonth()}>&rarr;</button>
         <Month timeContext={this.state.timeContext}/>
       </div>
     )
