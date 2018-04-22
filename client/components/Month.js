@@ -29,7 +29,26 @@ class Month extends Component {
       daysArray.push(i)
     }
     console.log("days array:", daysArray)
+    return daysArray;
   }
+
+  createRows = (daysArray) => {
+    let arrToMap = [];
+    let row = [];
+
+    for(let i=0;i<daysArray.length;i++){
+      if(i !== 0 && i%7 === 0){
+        arrToMap.push(row);
+        row = []
+        row.push(<td>{daysArray[i]}</td>)
+      } else {
+        row.push(<td>{daysArray[i]}</td>)
+      }  
+    }
+    console.log('arrtomap',arrToMap)
+    return arrToMap
+  }
+
 
   render(){
     const daysInMonth = this.props.timeContext.daysInMonth();
@@ -40,6 +59,7 @@ class Month extends Component {
     // console.log("todayNum:",this.todayNum)
     // console.log("today date:",this.todayDate)
     const daysArray = this.getDaysToMap(emptyDays,daysInMonth)
+    const mapRows = this.createRows(daysArray)
     return (
       <div>
         <table>
@@ -54,7 +74,9 @@ class Month extends Component {
                 return <td className='weekday-name box' key={idx}>{day}</td>
               })}
             </tr>
-
+            {mapRows.map((row,i)=>{
+              return (<tr key={i}>{row}</tr>)
+            })}
           </tbody>
         </table>
         <Day/>
