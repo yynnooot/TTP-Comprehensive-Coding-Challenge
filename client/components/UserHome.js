@@ -22,14 +22,16 @@ class UserHome extends Component {
     this.setState({timeContext: newContext})
   }
   render(){
-    let currentMonth = this.state.timeContext.format("MMMM");
-    let currentYear = this.state.timeContext.format("Y");
+    let month = this.state.timeContext.format("MMMM");
+    let year = this.state.timeContext.format("Y");
+    
+    
     return (
       <div>
-        <h3>{currentMonth} {currentYear}</h3>
+        <h3>{month} {year}</h3>
         <button onClick={()=>this.incrementMonth()}>add</button>
         <button onClick={()=>this.decrementMonth()}>subtract</button>
-        <Month/>
+        <Month timeContext={this.state.timeContext}/>
       </div>
     )
   }

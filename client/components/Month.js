@@ -20,11 +20,26 @@ class Month extends Component {
   todayNum = moment().format("D");
   todayDate = moment().format('l');
 
+  getDaysToMap = (emptyDays, daysInMonth) => {
+    let daysArray = [];
+    for(let i=1; i<=emptyDays; i++){
+      daysArray.push("")
+    }
+    for(let i=1; i<=daysInMonth; i++){
+      daysArray.push(i)
+    }
+    console.log("days array:", daysArray)
+  }
+
   render(){
-    
+    const daysInMonth = this.props.timeContext.daysInMonth();
+    const month = this.props.timeContext.format("MMMM");
+    const emptyDays = this.props.timeContext.startOf('month').format('d');
+    console.log('there are:',daysInMonth, "days in month:",month,',and:', emptyDays, "empty slots in front of calendar" )
     // console.log("weekdayName:",this.weekdayNames)
     // console.log("todayNum:",this.todayNum)
-    console.log("today date:",this.todayDate)
+    // console.log("today date:",this.todayDate)
+    const daysArray = this.getDaysToMap(emptyDays,daysInMonth)
     return (
       <div>
         <table>
