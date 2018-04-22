@@ -41,6 +41,9 @@ class Month extends Component {
         arrToMap.push(row);
         row = []
         row.push(<td>{daysArray[i]}</td>)
+      } else if(i === daysArray.length-1){
+        row.push(<td>{daysArray[i]}</td>)
+        arrToMap.push(row);
       } else {
         row.push(<td>{daysArray[i]}</td>)
       }  
