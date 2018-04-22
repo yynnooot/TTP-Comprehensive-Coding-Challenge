@@ -33,7 +33,10 @@ router.delete('/:id', (req, res, next) => {
       id: req.params.id
     }
   })
-    .then(() => res.send('event successfully deleted'))
+    .then(() => Event.findAll()
+      .then(events => res.json(events))
+      .catch(next)
+    )
     .catch(next)
 })
 

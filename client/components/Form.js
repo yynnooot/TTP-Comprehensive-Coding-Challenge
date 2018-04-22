@@ -19,7 +19,8 @@ class Form extends Component {
     const end = e.target.end.value;
     
     this.props.addEventThunk(title, description, date, start, end);
-    event.target.reset();
+    //e.target.reset();
+    this.props.toggle();
   }
   render(){
     console.log('this.props in FORM:',this.props)

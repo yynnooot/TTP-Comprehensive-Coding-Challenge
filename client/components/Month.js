@@ -21,8 +21,6 @@ class Month extends Component {
         <h1>Month COMPONENT</h1>
         
         <Day/>
-             
-        
         
       </div>
     )

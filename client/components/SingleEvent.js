@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { deleteEventThunk } from '../store/event';
 
-export default class SingleEvent extends Component {
+class SingleEvent extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -8,11 +10,24 @@ export default class SingleEvent extends Component {
     }
   }
   render(){
+    const id = this.props.event.id;
     return (
       <div>
-        <h1>From SingleEvent Component:</h1>
-        <h1>{this.props.event.title}</h1>
+        <h4>From SingleEvent Component:</h4>
+        <h6>{this.props.event.title}</h6>
+        <button onClick={()=>this.props.deleteEvent(id)}>delete</button>
       </div>
     )
   }
 }
+
+const mapStateToProps = () => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  deleteEvent: function(id){
+    dispatch(deleteEventThunk(id))
+  }
+})
+export default connect(mapStateToProps,mapDispatchToProps)(SingleEvent)

@@ -12,8 +12,6 @@ export const UserHome = (props) => {
     <div>
       <h3>UserHome Component</h3>
       <Month />
-      <Form />
-      
     </div>
   )
 }

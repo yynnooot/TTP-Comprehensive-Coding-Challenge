@@ -3,29 +3,32 @@ import { connect } from 'react-redux';
 import { getEvent } from '../store/event';
 import SingleEvent from './SingleEvent';
 
+import Form from './Form';
+
 class Day extends Component {
   constructor(props){
     super(props)
     this.state = {
-
+      showForm: false
     }
   }
   componentDidMount(){
     this.props.getEvent();
   }
+  toggleForm = () => {
+    this.setState({showForm: !this.state.showForm})
+  }
   render(){
-    console.log('********', this.props)
     return (
       <div>
-        <h1>DAY COMPONENT</h1>
+        <h3>DAY COMPONENT</h3>
         { this.props.allEvents && this.props.allEvents.map((itemObj,index) => {
-          console.log('EVENT OBJ:',itemObj)
             return (
               <SingleEvent key={index} event={itemObj}/>
-              
             )
           })
         }
+        {this.state.showForm ? <Form toggle={this.toggleForm}/> : <button onClick={()=>this.toggleForm()}>show form</button>}
         
       </div>
     )
