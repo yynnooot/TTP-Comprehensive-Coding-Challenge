@@ -16,7 +16,6 @@ describe('event routes', () => {
     beforeEach(() => {
       return event.create({
         title: 'test1',
-        description: 'test2',
         date: '11-02-2018',
         start: '10:00AM',
         end: '10:30AM'

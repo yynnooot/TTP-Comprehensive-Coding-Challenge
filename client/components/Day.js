@@ -18,23 +18,30 @@ class Day extends Component {
   render(){
 
     const { day, month, year, allEvents } = this.props;
-
-    return (
-      <div>
-        <h3>{day}</h3>
-        { allEvents && allEvents.filter(eventObj => { return eventObj.date === `${month}/${day}/${year}`}).map((eventObj,idx) => {
-          return <SingleEvent key={idx} event={eventObj}/>
-          })
-        } 
-        {this.state.showForm ? <Form toggle={this.toggleForm}/> : <button onClick={()=>this.toggleForm()}>show form</button>}
-        
-      </div>
-    )
+    const date = `${month}/${day}/${year}`;
+    // console.log('date in day:',date)
+    if(day){
+      return (
+        <div>
+          <h3>{day}</h3>
+          { allEvents && allEvents.filter(eventObj => { return eventObj.date === date}).map((eventObj,idx) => {
+            return <SingleEvent key={idx} event={eventObj}/>
+            })
+          } 
+          {this.state.showForm ? <Form date={date} toggle={this.toggleForm}/> : <button onClick={()=>this.toggleForm()}>show form</button>}
+          
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }
 
 const mapStateToProps = (state)=>({
-  allEvents: state.event.events
-})
-
+  allEvents: state.event.events,
+  month: state.event.month,
+  year: state.event.year
+}
+)
 export default connect(mapStateToProps)(Day)

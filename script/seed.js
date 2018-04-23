@@ -6,7 +6,7 @@ async function seed () {
   console.log('db synced!')
 
   const events = await Promise.all([
-    Event.create({date: '04/23/2018', title: 'Hire Tony Yoon', description: 'Front-End Engineer with UX and Fullstack Javascript Proficiency', start: '', end: ''})
+    Event.create({date: '04/23/2018', title: 'Hire Tony Yoon', start: '10:00AM', end: '8:00PM'})
   ])
   
   console.log(`seeded ${events.length} users`)

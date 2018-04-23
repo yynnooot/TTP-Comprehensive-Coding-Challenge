@@ -7,6 +7,8 @@ import history from '../history'
 export const ADD_EVENT = 'ADD_EVENT'
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS'
 export const DELETE_EVENT = 'DELETE_EVENT'
+export const SET_MONTH = 'SET_MONTH'
+export const SET_YEAR = 'SET_YEAR'
 /**
  * INITIAL STATE
  */
@@ -35,7 +37,18 @@ export function deleteEvent(eventsArray){
     eventsArray
   }
 }
-
+export function setMonth(month){
+  return {
+    type: SET_MONTH,
+    month
+  }
+}
+export function setYear(year){
+  return {
+    type: SET_YEAR,
+    year
+  }
+}
 /**
  * THUNK CREATORS
  */
@@ -46,9 +59,9 @@ export function getEvent(){
       .catch(err => console.error(err))
   }
 }
-export function addEventThunk(title, description, date, start, end){
+export function addEventThunk(title, date, start, end){
   return function(dispatch){
-    return axios.post('/api/event',{title, description, date, start, end})
+    return axios.post('/api/event',{title, date, start, end})
       .then(res => dispatch(addEvent(res.data)))
       .catch(err => console.error(err))
   }
@@ -71,6 +84,10 @@ export default function (state = initialState, action) {
       return {...state, events: [...state.events, action.newEvent ]}
     case DELETE_EVENT:
       return {...state, events: action.eventsArray}
+    case SET_MONTH:
+      return {...state, month: action.month }
+    case SET_YEAR:
+      return {...state, year: action.year }
     default:
       return state
   }

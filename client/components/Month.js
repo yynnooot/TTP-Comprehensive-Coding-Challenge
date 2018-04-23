@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent } from '../store/event';
 import moment from 'moment';
 
 import Day from './Day'
@@ -9,16 +8,8 @@ class Month extends Component {
   constructor(props){
     super(props)
     this.state = {
-      
     }
-    
   }
-  componentDidMount(){
-    this.props.getEvent();
-  }
-  weekdayNames = moment.weekdays();
-  month = this.props.timeContext.format('MM')
-  year = this.props.timeContext.format('Y')
 
   getDaysToMap = (emptyDays, daysInMonth) => {
     let daysArray = [];
@@ -34,17 +25,16 @@ class Month extends Component {
   setupRows = (daysArray) => {
     let arrOfRows = [];
     let row = [];
-  
     for(let i=0;i<daysArray.length;i++){
       if(i !== 0 && i%7 === 0){
         arrOfRows.push(row);
         row = []
-        row.push(<td key={i}> <Day day={daysArray[i]} month={this.month} year={this.year}/> </td>)
+        row.push(<td key={i}> <Day day={daysArray[i]} month={this.props.month} year={this.props.year}/> </td>)
       } else if(i === daysArray.length-1){
-        row.push(<td key={i}> <Day day={daysArray[i]} month={this.month} year={this.year}/> </td>)
+        row.push(<td key={i}> <Day day={daysArray[i]} month={this.props.month} year={this.props.year}/> </td>)
         arrOfRows.push(row);
       } else {
-        row.push(<td key={i}> <Day day={daysArray[i]} month={this.month} year={this.year}/> </td>)
+        row.push(<td key={i}> <Day day={daysArray[i]} month={this.props.month} year={this.props.year}/> </td>)
       }  
     }
     return arrOfRows
@@ -52,16 +42,15 @@ class Month extends Component {
 
 
   render(){
-
+    const weekdayNames = moment.weekdays();
     const daysInMonth = this.props.timeContext.daysInMonth();
-    const month = this.props.timeContext.format("MMMM");
+    const monthStr = this.props.timeContext.format("MMMM");
     const emptyDays = this.props.timeContext.startOf('month').format('d');
-    console.log('there are:',daysInMonth, "days in month:",month,',and:', emptyDays, "empty slots in front of calendar" )
-    // console.log("weekdayName:",this.weekdayNames)
-    // console.log("todayNum:",this.todayNum)
-    // console.log("today date:",this.todayDate)
+    console.log('there are:',daysInMonth, "days in month:",monthStr,',and:', emptyDays, "empty slots in front of calendar" )
+   
     const daysArray = this.getDaysToMap(emptyDays,daysInMonth)
     const rowsArray = this.setupRows(daysArray)
+
     return (
       <div>
         <table>
@@ -72,7 +61,7 @@ class Month extends Component {
           </thead>
           <tbody>
             <tr className='calendar-row'>
-              {this.weekdayNames.map((day,idx)=>{
+              {weekdayNames.map((day,idx)=>{
                 return <td className='weekday-name box' key={day}>{day}</td>
               })}
             </tr>
@@ -81,16 +70,16 @@ class Month extends Component {
             })}
           </tbody>
         </table>
-        <Day/>
-        
       </div>
     )
   }
 }
 
 const mapStateToProps = (state)=>({
-  allEvents: state.event.events
+    allEvents: state.event.events,
+    month: state.event.month,
+    year: state.event.year
   }
 )
 
-export default connect(mapStateToProps,{getEvent})(Month)
+export default connect(mapStateToProps)(Month)
