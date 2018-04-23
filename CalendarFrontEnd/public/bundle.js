@@ -21168,7 +21168,7 @@ var Day = function (_Component) {
       if (day) {
         return _react2.default.createElement(
           'div',
-          null,
+          { className: 'day-container' },
           _react2.default.createElement(
             'h3',
             null,
@@ -21245,12 +21245,10 @@ var Form = function (_Component) {
     _this.onSubmit = function (e) {
       e.preventDefault();
       var title = e.target.title.value;
-      // const date = e.target.date.value;
       var start = e.target.start.value;
       var end = e.target.end.value;
 
       _this.props.addEventThunk(title, _this.props.date, start, end);
-      //e.target.reset();
       _this.props.toggle();
     };
 
@@ -21267,7 +21265,14 @@ var Form = function (_Component) {
       // console.log('date in day:',date)
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'form-container' },
+        _react2.default.createElement(
+          'button',
+          { onClick: function onClick() {
+              return _this2.props.toggle();
+            } },
+          'x'
+        ),
         _react2.default.createElement(
           'form',
           { onSubmit: function onSubmit(e) {
@@ -46416,7 +46421,7 @@ var UserHome = function (_Component) {
             '\u2190'
           ),
           _react2.default.createElement(
-            'h3',
+            'h2',
             null,
             monthStr,
             ' ',
@@ -46862,29 +46867,16 @@ var Month = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'calendar-container' },
         _react2.default.createElement(
           'table',
           null,
-          _react2.default.createElement(
-            'thead',
-            null,
-            _react2.default.createElement(
-              'tr',
-              null,
-              _react2.default.createElement(
-                'td',
-                null,
-                'Month COMPONENT'
-              )
-            )
-          ),
           _react2.default.createElement(
             'tbody',
             null,
             _react2.default.createElement(
               'tr',
-              { className: 'calendar-row' },
+              null,
               weekdayNames.map(function (day, idx) {
                 return _react2.default.createElement(
                   'td',
@@ -46896,7 +46888,7 @@ var Month = function (_Component) {
             rowsArray.map(function (row, idx) {
               return _react2.default.createElement(
                 'tr',
-                { key: idx },
+                { key: idx, className: 'calendar-row' },
                 row
               );
             })
@@ -46966,7 +46958,6 @@ var SingleEvent = function (_Component) {
       var _this2 = this;
 
       var id = this.props.event.id;
-      console.log('id:', id);
       return _react2.default.createElement(
         'div',
         { className: 'event-title-container' },
@@ -47057,7 +47048,7 @@ exports = module.exports = __webpack_require__(283)(false);
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif;\n  margin: 0; }\n\nh1 {\n  margin: 0; }\n\na {\n  text-decoration: none; }\n\nlabel {\n  display: block; }\n\nnav a {\n  display: inline-block;\n  margin: 1em; }\n\nform div {\n  margin: 1em;\n  display: inline-block; }\n\n.box {\n  width: 14.28%; }\n\n.event-title-container {\n  display: flex; }\n\n.main-header-container {\n  background-color: blueviolet; }\n\n.main-title {\n  color: white; }\n\n.calendar-title-container {\n  display: flex; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif;\n  margin: 0; }\n\nh1, h2, h3, h4, h5, h6, td {\n  margin: 0;\n  padding: 0; }\n\ntable {\n  border-spacing: 0;\n  border-collapse: collapse; }\n\na {\n  text-decoration: none; }\n\nlabel {\n  display: block; }\n\nnav a {\n  display: inline-block;\n  margin: 1em; }\n\nform div {\n  margin: 1em;\n  display: inline-block; }\n\n.box {\n  width: 14.28%; }\n\n.event-title-container {\n  display: flex;\n  padding-left: 2rem; }\n  .event-title-container button {\n    height: 7px; }\n\n.main-header-container {\n  text-align: center;\n  background-image: linear-gradient(120deg, #38ed7c 0%, #2598f7 100%);\n  h1-padding: 1.5rem 0; }\n\n.main-title {\n  color: white; }\n\n.calendar-title-container {\n  display: flex;\n  justify-content: center;\n  padding-top: 2rem; }\n  .calendar-title-container h2 {\n    padding: 0 2rem; }\n  .calendar-title-container button {\n    border-radius: 7px; }\n\n.calendar-container {\n  padding-top: 3rem;\n  margin: 0 5rem; }\n  .calendar-container table {\n    width: 100%; }\n\n.weekday-name {\n  text-align: center;\n  border-bottom: 1px solid black;\n  padding-bottom: 1rem; }\n\n.day-container {\n  height: 8rem; }\n  .day-container h3 {\n    padding: 1rem; }\n\n.day-container:hover {\n  border: 2px solid #3ea4f7;\n  box-sizing: border-box; }\n", ""]);
 
 // exports
 

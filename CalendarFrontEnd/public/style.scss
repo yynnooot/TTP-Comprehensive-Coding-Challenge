@@ -2,7 +2,14 @@ body {
   font-family: sans-serif;
   margin: 0; 
 }
-h1 {margin: 0}
+h1, h2, h3, h4, h5, h6, td {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
 a {
   text-decoration: none;
 }
@@ -27,13 +34,56 @@ form div {
 
 .event-title-container {
   display: flex;
+  padding-left: 2rem;
+  button {
+    height: 7px;
+  }
 }
 .main-header-container {
-  background-color: blueviolet;
+  text-align: center;
+  background-image: linear-gradient(120deg, #38ed7c 0%, #2598f7 100%);
+  h1: {
+    padding: 1.5rem 0;
+  }
 }
 .main-title {
   color: white;
 }
 .calendar-title-container {
   display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  h2 {
+    padding: 0 2rem;
+  }
+  button {
+    border-radius: 7px;
+  }
+}
+.calendar-container {
+  padding-top: 3rem;
+  margin: 0 5rem;
+  table {
+    width: 100%;
+  }
+}
+
+.weekday-name {
+  text-align: center;
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+}
+
+.calendar-row {
+  
+}
+.day-container {
+  height: 8rem;
+  h3 {
+    padding: 1rem;
+  }
+}
+.day-container:hover {
+  border: 2px solid #3ea4f7;
+  box-sizing: border-box;
 }

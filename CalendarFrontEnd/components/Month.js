@@ -52,21 +52,21 @@ class Month extends Component {
     const rowsArray = this.setupRows(daysArray)
 
     return (
-      <div>
+      <div className='calendar-container'>
         <table>
-          <thead>
+          {/* <thead>
             <tr>
-              <td>Month COMPONENT</td>
+              <hr/>
             </tr>
-          </thead>
+          </thead> */}
           <tbody>
-            <tr className='calendar-row'>
+            <tr>
               {weekdayNames.map((day,idx)=>{
                 return <td className='weekday-name box' key={day}>{day}</td>
               })}
             </tr>
             {rowsArray.map((row,idx)=>{
-              return (<tr key={idx}>{row}</tr>)
+              return (<tr key={idx} className='calendar-row'>{row}</tr>)
             })}
           </tbody>
         </table>

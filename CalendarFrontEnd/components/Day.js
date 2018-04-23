@@ -22,7 +22,7 @@ class Day extends Component {
     // console.log('date in day:',date)
     if(day){
       return (
-        <div>
+        <div className='day-container'>
           <h3>{day}</h3>
           { allEvents && allEvents.filter(eventObj => { return eventObj.date === date}).map((eventObj,idx) => {
             return <SingleEvent key={idx} event={eventObj}/>

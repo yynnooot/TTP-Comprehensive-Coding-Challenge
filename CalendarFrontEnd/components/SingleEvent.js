@@ -11,7 +11,6 @@ class SingleEvent extends Component {
   }
   render(){
     const id = this.props.event.id;
-    console.log('id:',id)
     return (
       <div className='event-title-container'>
         <h6>{this.props.event.title}</h6>

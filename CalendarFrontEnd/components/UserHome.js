@@ -43,7 +43,7 @@ class UserHome extends Component {
       <div>
         <div className='calendar-title-container'>
           <button onClick={()=>this.decrementMonth()}>&larr;</button>
-          <h3>{monthStr} {year}</h3>
+          <h2>{monthStr} {year}</h2>
           <button onClick={()=>this.incrementMonth()}>&rarr;</button>
         </div>
         
