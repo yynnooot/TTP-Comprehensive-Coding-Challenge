@@ -27,3 +27,13 @@ form div {
 .event-title-container {
   display: flex;
 }
+.main-header-container {
+  background-color: blueviolet;
+}
+.main-title {
+  color: white;
+  font-size: 100px;
+}
+.calendar-title-container {
+  display: flex;
+}

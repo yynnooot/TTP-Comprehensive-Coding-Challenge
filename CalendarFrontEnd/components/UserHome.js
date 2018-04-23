@@ -41,9 +41,12 @@ class UserHome extends Component {
   
     return (
       <div>
-        <h3>{monthStr} {year}</h3>
-        <button onClick={()=>this.decrementMonth()}>&larr;</button>
-        <button onClick={()=>this.incrementMonth()}>&rarr;</button>
+        <div className='calendar-title-container'>
+          <button onClick={()=>this.decrementMonth()}>&larr;</button>
+          <h3>{monthStr} {year}</h3>
+          <button onClick={()=>this.incrementMonth()}>&rarr;</button>
+        </div>
+        
         <Month timeContext={this.state.timeContext} />
       </div>
     )

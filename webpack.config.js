@@ -2,10 +2,10 @@ const LiveReloadPlugin = require('webpack-livereload-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: './client/index.js',
+  entry: './CalendarFrontEnd/index.js',
   output: {
     path: __dirname,
-    filename: './public/bundle.js'
+    filename: './CalendarFrontEnd/public/bundle.js'
   },
   devtool: 'source-map',
   module: {
