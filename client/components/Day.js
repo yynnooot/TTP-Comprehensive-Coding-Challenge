@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getEvent } from '../store/event';
-import SingleEvent from './SingleEvent';
 
+import SingleEvent from './SingleEvent';
 import Form from './Form';
 
 class Day extends Component {
@@ -12,22 +11,21 @@ class Day extends Component {
       showForm: false
     }
   }
-  componentDidMount(){
-    this.props.getEvent();
-  }
+  
   toggleForm = () => {
     this.setState({showForm: !this.state.showForm})
   }
   render(){
+
+    const { day, month, year, allEvents } = this.props;
+
     return (
       <div>
-        <h3>{this.props.num}</h3>
-        { this.props.allEvents && this.props.allEvents.map((itemObj,index) => {
-            return (
-              <SingleEvent key={index} event={itemObj}/>
-            )
+        <h3>{day}</h3>
+        { allEvents && allEvents.filter(eventObj => { return eventObj.date === `${month}/${day}/${year}`}).map((eventObj,idx) => {
+          return <SingleEvent key={idx} event={eventObj}/>
           })
-        }
+        } 
         {this.state.showForm ? <Form toggle={this.toggleForm}/> : <button onClick={()=>this.toggleForm()}>show form</button>}
         
       </div>
@@ -37,7 +35,6 @@ class Day extends Component {
 
 const mapStateToProps = (state)=>({
   allEvents: state.event.events
-  }
-)
+})
 
-export default connect(mapStateToProps,{getEvent})(Day)
+export default connect(mapStateToProps)(Day)

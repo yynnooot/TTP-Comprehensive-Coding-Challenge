@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import moment from 'moment';
-
+import { getEvent } from '../store/event';
 import Month from './Month';
 
 class UserHome extends Component {
@@ -12,7 +12,9 @@ class UserHome extends Component {
       timeContext: moment()
     }
   }  
-
+  componentDidMount(){
+    this.props.getEvent();
+  }
   incrementMonth = () => {
     let newContext = moment(this.state.timeContext).add(1,"month")
     this.setState({timeContext: newContext})
@@ -22,8 +24,8 @@ class UserHome extends Component {
     this.setState({timeContext: newContext})
   }
   render(){
-    let month = this.state.timeContext.format("MMMM");
-    let year = this.state.timeContext.format("Y");
+    const month = this.state.timeContext.format("MMMM");
+    const year = this.state.timeContext.format("Y");
     
     
     return (
@@ -31,7 +33,7 @@ class UserHome extends Component {
         <h3>{month} {year}</h3>
         <button onClick={()=>this.decrementMonth()}>&larr;</button>
         <button onClick={()=>this.incrementMonth()}>&rarr;</button>
-        <Month timeContext={this.state.timeContext}/>
+        <Month timeContext={this.state.timeContext} />
       </div>
     )
   }
@@ -40,17 +42,7 @@ class UserHome extends Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    
-  }
-}
 
-export default connect(mapState)(UserHome)
 
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  
-}
+
+export default connect(null, {getEvent})(UserHome);

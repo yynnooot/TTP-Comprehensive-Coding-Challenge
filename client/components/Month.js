@@ -17,8 +17,8 @@ class Month extends Component {
     this.props.getEvent();
   }
   weekdayNames = moment.weekdays();
-  todayNum = moment().format("D");
-  todayDate = moment().format('l');
+  month = this.props.timeContext.format('MM')
+  year = this.props.timeContext.format('Y')
 
   getDaysToMap = (emptyDays, daysInMonth) => {
     let daysArray = [];
@@ -34,17 +34,17 @@ class Month extends Component {
   setupRows = (daysArray) => {
     let arrOfRows = [];
     let row = [];
-
+  
     for(let i=0;i<daysArray.length;i++){
       if(i !== 0 && i%7 === 0){
         arrOfRows.push(row);
         row = []
-        row.push(<td><Day num={daysArray[i]}/></td>)
+        row.push(<td key={i}> <Day day={daysArray[i]} month={this.month} year={this.year}/> </td>)
       } else if(i === daysArray.length-1){
-        row.push(<td><Day num={daysArray[i]}/></td>)
+        row.push(<td key={i}> <Day day={daysArray[i]} month={this.month} year={this.year}/> </td>)
         arrOfRows.push(row);
       } else {
-        row.push(<td><Day num={daysArray[i]}/></td>)
+        row.push(<td key={i}> <Day day={daysArray[i]} month={this.month} year={this.year}/> </td>)
       }  
     }
     return arrOfRows
@@ -52,6 +52,7 @@ class Month extends Component {
 
 
   render(){
+
     const daysInMonth = this.props.timeContext.daysInMonth();
     const month = this.props.timeContext.format("MMMM");
     const emptyDays = this.props.timeContext.startOf('month').format('d');
@@ -72,7 +73,7 @@ class Month extends Component {
           <tbody>
             <tr className='calendar-row'>
               {this.weekdayNames.map((day,idx)=>{
-                return <td className='weekday-name box' key={idx}>{day}</td>
+                return <td className='weekday-name box' key={day}>{day}</td>
               })}
             </tr>
             {rowsArray.map((row,idx)=>{

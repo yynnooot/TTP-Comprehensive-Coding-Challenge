@@ -11,23 +11,19 @@ class SingleEvent extends Component {
   }
   render(){
     const id = this.props.event.id;
+    console.log('id:',id)
     return (
-      <div>
-        <h4>From SingleEvent Component:</h4>
+      <div className='event-title-container'>
         <h6>{this.props.event.title}</h6>
-        <button onClick={()=>this.props.deleteEvent(id)}>delete</button>
+        <button onClick={()=>this.props.deleteEvent(id)}>x</button>
       </div>
     )
   }
 }
-
-const mapStateToProps = () => ({
-
-})
 
 const mapDispatchToProps = (dispatch) => ({
   deleteEvent: function(id){
     dispatch(deleteEventThunk(id))
   }
 })
-export default connect(mapStateToProps,mapDispatchToProps)(SingleEvent)
+export default connect(null,mapDispatchToProps)(SingleEvent)
