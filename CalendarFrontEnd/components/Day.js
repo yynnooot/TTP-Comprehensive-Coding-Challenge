@@ -8,17 +8,21 @@ class Day extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showForm: false
+      showForm: false,
+      disableShowForm: false
     }
   }
   
   showForm = () => {
+    if(this.state.disableShowForm){
+      return
+    }
     this.setState({showForm: true})
-    console.log("HIT SHOWFORM. state showForm is:", this.state.showForm)
+    this.setState({disableShowForm: true})
   }
   hideForm = () => {
     this.setState({showForm: false})
-    console.log("HIT HIDEFORM. state showForm is:", this.state.showForm)
+    this.setState({disableShowForm: false})
   }
   render(){
 
@@ -34,7 +38,7 @@ class Day extends Component {
             return <SingleEvent key={idx} event={eventObj}/>
             })
           } 
-          {this.state.showForm && <Form date={date} events={events} hideForm={this.hideForm.bind(this)}/>}
+          {this.state.showForm && <Form date={date} events={events} hideForm={this.hideForm}/>}
           
         </div>
       )
