@@ -5416,12 +5416,8 @@ exports.default = function () {
     case SET_MONTH:
       return _extends({}, state, { month: action.month });
     case SET_YEAR:
-      return _extends({}, state, { year: action.year
-        // case SHOW_FORM:
-        //   return {...state, showForm: true }
-        // case HIDE_FORM:
-        //   return {...state, showForm: false }
-      });default:
+      return _extends({}, state, { year: action.year });
+    default:
       return state;
   }
 };
@@ -5446,19 +5442,16 @@ var GET_ALL_EVENTS = exports.GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 var DELETE_EVENT = exports.DELETE_EVENT = 'DELETE_EVENT';
 var SET_MONTH = exports.SET_MONTH = 'SET_MONTH';
 var SET_YEAR = exports.SET_YEAR = 'SET_YEAR';
-// export const SHOW_FORM = 'SHOW_FORM'
-// export const HIDE_FORM = 'HIDE_FORM'
+
 /**
  * INITIAL STATE
  */
-var initialState = {}
-// showForm: false
-
+var initialState = {};
 
 /**
  * ACTION CREATORS
  */
-;function addEvent(newEvent) {
+function addEvent(newEvent) {
   return {
     type: ADD_EVENT,
     newEvent: newEvent
@@ -5491,17 +5484,6 @@ function setYear(year) {
   };
 }
 
-// export function showForm(){
-//   return {
-//     type: SHOW_FORM
-//   }
-// }
-
-// export function hideForm(){
-//   return {
-//     type: HIDE_FORM
-//   }
-// }
 /**
  * THUNK CREATORS
  */
@@ -6689,8 +6671,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import {addEventThunk, deleteEventThunk, hideForm } from '../store/event';
-
 
 var Form = function (_Component) {
   _inherits(Form, _Component);
@@ -6734,7 +6714,7 @@ var Form = function (_Component) {
               } },
             'x'
           ),
-          this.props.events ? _react2.default.createElement(
+          this.props.events.length > 0 ? _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement(
@@ -6839,9 +6819,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     deleteEvent: function deleteEvent(id) {
       dispatch((0, _event.deleteEventThunk)(id));
     }
-    // hideFormFunc: function(){
-    //   dispatch(hideForm())
-    // }
   };
 };
 
@@ -21324,8 +21301,6 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _event = __webpack_require__(10);
-
 var _SingleEvent = __webpack_require__(280);
 
 var _SingleEvent2 = _interopRequireDefault(_SingleEvent);
@@ -21352,11 +21327,12 @@ var Day = function (_Component) {
 
     _this.showForm = function () {
       _this.setState({ showForm: true });
+      console.log("HIT SHOWFORM. state showForm is:", _this.state.showForm);
     };
 
     _this.hideForm = function () {
       _this.setState({ showForm: false });
-      console.log("HIT HIDEFORM");
+      console.log("HIT HIDEFORM. state showForm is:", _this.state.showForm);
     };
 
     _this.state = {
@@ -21395,7 +21371,7 @@ var Day = function (_Component) {
             events.push(eventObj);
             return _react2.default.createElement(_SingleEvent2.default, { key: idx, event: eventObj });
           }),
-          this.state.showForm && _react2.default.createElement(_Form2.default, { date: date, events: events, hideForm: this.hideForm })
+          this.state.showForm && _react2.default.createElement(_Form2.default, { date: date, events: events, hideForm: this.hideForm.bind(this) })
         );
       } else {
         return null;
@@ -21410,19 +21386,11 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     allEvents: state.event.events,
     month: state.event.month,
-    year: state.event.year,
-    showForm: state.event.showForm
+    year: state.event.year
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    showFormFunc: function showFormFunc() {
-      dispatch((0, _event.showForm)());
-    },
-    hideFormFunc: function hideFormFunc() {
-      dispatch((0, _event.hideForm)());
-    }
-  };
+  return {};
 };
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Day);
 
@@ -47142,7 +47110,7 @@ exports = module.exports = __webpack_require__(283)(false);
 
 
 // module
-exports.push([module.i, "body {\n  font-family: sans-serif;\n  margin: 0; }\n\nh1, h2, h3, h4, h5, h6, td {\n  margin: 0;\n  padding: 0; }\n\ntable {\n  border-spacing: 0;\n  border-collapse: collapse; }\n\na {\n  text-decoration: none; }\n\nlabel {\n  display: block; }\n\nnav a {\n  display: inline-block;\n  margin: 1em; }\n\nform div {\n  margin: 1em;\n  display: inline-block; }\n\n.box {\n  width: 14.28%; }\n\n.main-header-container {\n  text-align: center;\n  background-image: linear-gradient(120deg, #38ed7c 0%, #2598f7 100%);\n  h1-padding: 1.5rem 0; }\n\n.main-title {\n  color: white; }\n\n.calendar-title-container {\n  display: flex;\n  justify-content: center;\n  padding-top: 2rem; }\n  .calendar-title-container h2 {\n    padding: 0 2rem; }\n  .calendar-title-container button {\n    border-radius: 7px; }\n\n.calendar-container {\n  padding-top: 3rem;\n  margin: 0 5rem; }\n  .calendar-container table {\n    width: 100%; }\n\n.weekday-name {\n  text-align: center;\n  border-bottom: 1px solid black;\n  padding-bottom: 1rem; }\n\n.day-container {\n  height: 8rem; }\n  .day-container h3 {\n    padding: 1rem 0 0 1rem; }\n\n.day-container:hover {\n  border: 2px solid #3ea4f7;\n  box-sizing: border-box; }\n\n.event-title-container {\n  display: flex;\n  width: 75%;\n  margin: 0 auto;\n  align-items: center; }\n  .event-title-container h6 {\n    padding-right: 0.5rem; }\n  .event-title-container button {\n    border-radius: 3px; }\n  .event-title-container button:hover {\n    background-color: red;\n    color: white; }\n\n.popup-div {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  margin: auto;\n  background-color: rgba(39, 35, 35, 0.89);\n  padding: 25px; }\n  .popup-div .popup-inner-div {\n    position: absolute;\n    left: 25%;\n    right: 25%;\n    top: 25%;\n    bottom: 25%;\n    margin: auto;\n    background: #bdb7ee;\n    padding: 5em; }\n    .popup-div .popup-inner-div button {\n      float: right; }\n\n.form-event-display {\n  display: flex;\n  align-items: center; }\n\n.inline {\n  display: flex; }\n", ""]);
+exports.push([module.i, "body {\n  font-family: sans-serif;\n  margin: 0; }\n\nh1, h2, h3, h4, h5, h6, td {\n  margin: 0;\n  padding: 0; }\n\ntable {\n  border-spacing: 0;\n  border-collapse: collapse; }\n\na {\n  text-decoration: none; }\n\nlabel {\n  display: block; }\n\nnav a {\n  display: inline-block;\n  margin: 1em; }\n\nform div {\n  margin: 1em;\n  display: inline-block; }\n\n.box {\n  width: 14.28%; }\n\n.main-header-container {\n  text-align: center;\n  background-image: linear-gradient(120deg, #38ed7c 0%, #2598f7 100%);\n  h1-padding: 1.5rem 0; }\n\n.main-title {\n  color: white; }\n\n.calendar-title-container {\n  display: flex;\n  justify-content: center;\n  padding-top: 2rem; }\n  .calendar-title-container h2 {\n    padding: 0 2rem; }\n  .calendar-title-container button {\n    border-radius: 7px; }\n\n.calendar-container {\n  padding-top: 3rem;\n  margin: 0 5rem; }\n  .calendar-container table {\n    width: 100%; }\n\n.weekday-name {\n  text-align: center;\n  border-bottom: 1px solid black;\n  padding-bottom: 1rem; }\n\n.day-container {\n  height: 8rem; }\n  .day-container h3 {\n    padding: 1rem 0 0 1rem; }\n\n.day-container:hover {\n  border: 2px solid #3ea4f7;\n  box-sizing: border-box; }\n\n.event-title-container {\n  display: flex;\n  width: 75%;\n  margin: 0 auto;\n  align-items: center; }\n  .event-title-container h6 {\n    padding-right: 0.5rem; }\n  .event-title-container button {\n    border-radius: 3px; }\n  .event-title-container button:hover {\n    background-color: red;\n    color: white; }\n\n.popup-div {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  margin: auto;\n  background-color: rgba(39, 35, 35, 0.89);\n  padding: 25px; }\n  .popup-div .popup-inner-div {\n    position: absolute;\n    left: 25%;\n    right: 25%;\n    top: 25%;\n    bottom: 25%;\n    margin: auto;\n    background: #eafbff;\n    padding: 5em; }\n    .popup-div .popup-inner-div button {\n      float: right; }\n\n.form-event-display {\n  display: flex;\n  align-items: center; }\n\n.inline {\n  display: flex; }\n", ""]);
 
 // exports
 

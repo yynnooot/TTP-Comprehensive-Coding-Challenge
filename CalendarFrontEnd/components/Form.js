@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import {addEventThunk, deleteEventThunk, hideForm } from '../store/event';
 import {addEventThunk, deleteEventThunk } from '../store/event';
 
 class Form extends Component {
@@ -28,7 +27,7 @@ class Form extends Component {
         <div className='popup-inner-div'>
           <button onClick={()=>this.props.hideForm()}>x</button>
 
-          { this.props.events? 
+          { this.props.events.length > 0? 
             ( <div>  
               <h2>Your Events For {this.props.date}:</h2>
               <ul> 
@@ -78,10 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   deleteEvent: function(id){
     dispatch(deleteEventThunk(id))
-  },
-  // hideFormFunc: function(){
-  //   dispatch(hideForm())
-  // }
+  }
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Form);

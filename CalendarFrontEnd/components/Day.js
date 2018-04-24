@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {showForm, hideForm } from '../store/event';
 
 import SingleEvent from './SingleEvent';
 import Form from './Form';
@@ -15,10 +14,11 @@ class Day extends Component {
   
   showForm = () => {
     this.setState({showForm: true})
+    console.log("HIT SHOWFORM. state showForm is:", this.state.showForm)
   }
   hideForm = () => {
     this.setState({showForm: false})
-    console.log("HIT HIDEFORM")
+    console.log("HIT HIDEFORM. state showForm is:", this.state.showForm)
   }
   render(){
 
@@ -34,7 +34,7 @@ class Day extends Component {
             return <SingleEvent key={idx} event={eventObj}/>
             })
           } 
-          {this.state.showForm && <Form date={date} events={events} hideForm={this.hideForm}/>}
+          {this.state.showForm && <Form date={date} events={events} hideForm={this.hideForm.bind(this)}/>}
           
         </div>
       )
@@ -47,15 +47,9 @@ class Day extends Component {
 const mapStateToProps = (state)=>({
   allEvents: state.event.events,
   month: state.event.month,
-  year: state.event.year,
-  showForm: state.event.showForm
+  year: state.event.year
 })
 const mapDispatchToProps = (dispatch) => ({
-  showFormFunc: function(){
-    dispatch(showForm())
-  },
-  hideFormFunc: function(){
-    dispatch(hideForm())
-  }
+  
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Day)
