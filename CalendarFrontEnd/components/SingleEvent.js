@@ -14,7 +14,7 @@ class SingleEvent extends Component {
     return (
       <div className='event-title-container'>
         <h6>{this.props.event.title}</h6>
-        <button onClick={()=>this.props.deleteEvent(id)}>x</button>
+        {/* <button onClick={()=>this.props.deleteEvent(id)}>x</button> */}
       </div>
     )
   }

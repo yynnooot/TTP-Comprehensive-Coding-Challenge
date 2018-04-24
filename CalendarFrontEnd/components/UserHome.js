@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import moment from 'moment';
 import { getEvent, setMonth, setYear } from '../store/event';
 import Month from './Month';
+import Form from './Form';
 
 class UserHome extends Component {
   constructor(props){

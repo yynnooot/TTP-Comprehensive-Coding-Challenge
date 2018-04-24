@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {showForm, hideForm } from '../store/event';
 
 import SingleEvent from './SingleEvent';
 import Form from './Form';
@@ -8,27 +9,32 @@ class Day extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showForm: false
+      showForm: this.props.showForm
     }
   }
   
-  toggleForm = () => {
-    this.setState({showForm: !this.state.showForm})
-  }
+  // showForm = () => {
+  //   this.setState({showForm: true})
+  // }
+  // hideForm = () => {
+  //   this.setState({showForm: false})
+  //   console.log("HIT HIDEFORM")
+  // }
   render(){
 
     const { day, month, year, allEvents } = this.props;
     const date = `${month}/${day}/${year}`;
-    // console.log('date in day:',date)
+    const events = []
     if(day){
       return (
-        <div className='day-container'>
+        <div className='day-container' onClick={()=>this.props.showFormFunc()}>
           <h3>{day}</h3>
           { allEvents && allEvents.filter(eventObj => { return eventObj.date === date}).map((eventObj,idx) => {
+            events.push(eventObj)
             return <SingleEvent key={idx} event={eventObj}/>
             })
           } 
-          {this.state.showForm ? <Form date={date} toggle={this.toggleForm}/> : <button onClick={()=>this.toggleForm()}>show form</button>}
+          {this.state.showForm && <Form date={date} events={events}/>}
           
         </div>
       )
@@ -41,7 +47,15 @@ class Day extends Component {
 const mapStateToProps = (state)=>({
   allEvents: state.event.events,
   month: state.event.month,
-  year: state.event.year
-}
-)
-export default connect(mapStateToProps)(Day)
+  year: state.event.year,
+  showForm: state.event.showForm
+})
+const mapDispatchToProps = (dispatch) => ({
+  showFormFunc: function(){
+    dispatch(showForm())
+  },
+  hideFormFunc: function(){
+    dispatch(hideForm())
+  }
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Day)
