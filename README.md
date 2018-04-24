@@ -6,7 +6,9 @@ This repository consists of two parts:
 
 ## Setup
 
-This project was bootstrapped with Fullstack Academy's Boilermaker.
+This project was bootstrapped with Fullstack Academy's Boilermaker
+
+It was built with: NodeJS, Express, React, Redux, PostgreSQL, Sequelize
 
 To use this project, you'll need to take the following steps:
 
