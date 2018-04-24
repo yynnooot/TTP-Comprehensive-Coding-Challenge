@@ -9,17 +9,17 @@ class Day extends Component {
   constructor(props){
     super(props)
     this.state = {
-      showForm: this.props.showForm
+      showForm: false
     }
   }
   
-  // showForm = () => {
-  //   this.setState({showForm: true})
-  // }
-  // hideForm = () => {
-  //   this.setState({showForm: false})
-  //   console.log("HIT HIDEFORM")
-  // }
+  showForm = () => {
+    this.setState({showForm: true})
+  }
+  hideForm = () => {
+    this.setState({showForm: false})
+    console.log("HIT HIDEFORM")
+  }
   render(){
 
     const { day, month, year, allEvents } = this.props;
@@ -27,14 +27,14 @@ class Day extends Component {
     const events = []
     if(day){
       return (
-        <div className='day-container' onClick={()=>this.props.showFormFunc()}>
+        <div className='day-container' onClick={()=>this.showForm()}>
           <h3>{day}</h3>
           { allEvents && allEvents.filter(eventObj => { return eventObj.date === date}).map((eventObj,idx) => {
             events.push(eventObj)
             return <SingleEvent key={idx} event={eventObj}/>
             })
           } 
-          {this.state.showForm && <Form date={date} events={events}/>}
+          {this.state.showForm && <Form date={date} events={events} hideForm={this.hideForm}/>}
           
         </div>
       )

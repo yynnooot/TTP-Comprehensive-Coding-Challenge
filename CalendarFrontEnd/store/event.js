@@ -9,13 +9,13 @@ export const GET_ALL_EVENTS = 'GET_ALL_EVENTS'
 export const DELETE_EVENT = 'DELETE_EVENT'
 export const SET_MONTH = 'SET_MONTH'
 export const SET_YEAR = 'SET_YEAR'
-export const SHOW_FORM = 'SHOW_FORM'
-export const HIDE_FORM = 'HIDE_FORM'
+// export const SHOW_FORM = 'SHOW_FORM'
+// export const HIDE_FORM = 'HIDE_FORM'
 /**
  * INITIAL STATE
  */
 const initialState = {
-  showForm: false
+  // showForm: false
 }
 
 /**
@@ -54,17 +54,17 @@ export function setYear(year){
   }
 }
 
-export function showForm(){
-  return {
-    type: SHOW_FORM
-  }
-}
+// export function showForm(){
+//   return {
+//     type: SHOW_FORM
+//   }
+// }
 
-export function hideForm(){
-  return {
-    type: HIDE_FORM
-  }
-}
+// export function hideForm(){
+//   return {
+//     type: HIDE_FORM
+//   }
+// }
 /**
  * THUNK CREATORS
  */
@@ -104,10 +104,10 @@ export default function (state = initialState, action) {
       return {...state, month: action.month }
     case SET_YEAR:
       return {...state, year: action.year }
-    case SHOW_FORM:
-      return {...state, showForm: true }
-    case HIDE_FORM:
-      return {...state, showForm: false }
+    // case SHOW_FORM:
+    //   return {...state, showForm: true }
+    // case HIDE_FORM:
+    //   return {...state, showForm: false }
     default:
       return state
   }

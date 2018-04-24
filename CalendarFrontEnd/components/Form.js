@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {addEventThunk, deleteEventThunk, hideForm } from '../store/event';
+// import {addEventThunk, deleteEventThunk, hideForm } from '../store/event';
+import {addEventThunk, deleteEventThunk } from '../store/event';
 
 class Form extends Component {
   constructor(props){
@@ -17,7 +18,7 @@ class Form extends Component {
     const end = e.target.end.value;
     
     this.props.addEventThunk(title, this.props.date, start, end);
-    this.props.hideFormFunc();
+    this.props.hideForm();
   }
   render(){
     console.log('this.props.date in FORM:',this.props.date)
@@ -25,9 +26,10 @@ class Form extends Component {
     return (
       <div className='form-container popup-div'>
         <div className='popup-inner-div'>
-          <button onClick={()=>this.props.hideFormFunc()}>x</button>
+          <button onClick={()=>this.props.hideForm()}>x</button>
+
           { this.props.events? 
-            (<div>  
+            ( <div>  
               <h2>Your Events For {this.props.date}:</h2>
               <ul> 
                 {this.props.events.map((eventObj,idx) => {
@@ -39,7 +41,9 @@ class Form extends Component {
                   )
                 })}
               </ul>
-            </div>) : <h2>{this.props.date}</h2>}
+            </div>) : <h2>{this.props.date}</h2>
+          }
+
           <h2>Add More Events Below:</h2>
           <form className='form' onSubmit={(e)=>this.onSubmit(e)}>
             <div className='inline'>
@@ -75,9 +79,9 @@ const mapDispatchToProps = (dispatch) => ({
   deleteEvent: function(id){
     dispatch(deleteEventThunk(id))
   },
-  hideFormFunc: function(){
-    dispatch(hideForm())
-  }
+  // hideFormFunc: function(){
+  //   dispatch(hideForm())
+  // }
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Form);

@@ -5389,7 +5389,7 @@ module.exports = emptyFunction;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HIDE_FORM = exports.SHOW_FORM = exports.SET_YEAR = exports.SET_MONTH = exports.DELETE_EVENT = exports.GET_ALL_EVENTS = exports.ADD_EVENT = undefined;
+exports.SET_YEAR = exports.SET_MONTH = exports.DELETE_EVENT = exports.GET_ALL_EVENTS = exports.ADD_EVENT = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -5398,8 +5398,6 @@ exports.getAllEvents = getAllEvents;
 exports.deleteEvent = deleteEvent;
 exports.setMonth = setMonth;
 exports.setYear = setYear;
-exports.showForm = showForm;
-exports.hideForm = hideForm;
 exports.getEvent = getEvent;
 exports.addEventThunk = addEventThunk;
 exports.deleteEventThunk = deleteEventThunk;
@@ -5418,12 +5416,12 @@ exports.default = function () {
     case SET_MONTH:
       return _extends({}, state, { month: action.month });
     case SET_YEAR:
-      return _extends({}, state, { year: action.year });
-    case SHOW_FORM:
-      return _extends({}, state, { showForm: true });
-    case HIDE_FORM:
-      return _extends({}, state, { showForm: false });
-    default:
+      return _extends({}, state, { year: action.year
+        // case SHOW_FORM:
+        //   return {...state, showForm: true }
+        // case HIDE_FORM:
+        //   return {...state, showForm: false }
+      });default:
       return state;
   }
 };
@@ -5448,18 +5446,19 @@ var GET_ALL_EVENTS = exports.GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 var DELETE_EVENT = exports.DELETE_EVENT = 'DELETE_EVENT';
 var SET_MONTH = exports.SET_MONTH = 'SET_MONTH';
 var SET_YEAR = exports.SET_YEAR = 'SET_YEAR';
-var SHOW_FORM = exports.SHOW_FORM = 'SHOW_FORM';
-var HIDE_FORM = exports.HIDE_FORM = 'HIDE_FORM';
+// export const SHOW_FORM = 'SHOW_FORM'
+// export const HIDE_FORM = 'HIDE_FORM'
 /**
  * INITIAL STATE
  */
-var initialState = {
-  showForm: false
+var initialState = {}
+// showForm: false
 
-  /**
-   * ACTION CREATORS
-   */
-};function addEvent(newEvent) {
+
+/**
+ * ACTION CREATORS
+ */
+;function addEvent(newEvent) {
   return {
     type: ADD_EVENT,
     newEvent: newEvent
@@ -5492,17 +5491,17 @@ function setYear(year) {
   };
 }
 
-function showForm() {
-  return {
-    type: SHOW_FORM
-  };
-}
+// export function showForm(){
+//   return {
+//     type: SHOW_FORM
+//   }
+// }
 
-function hideForm() {
-  return {
-    type: HIDE_FORM
-  };
-}
+// export function hideForm(){
+//   return {
+//     type: HIDE_FORM
+//   }
+// }
 /**
  * THUNK CREATORS
  */
@@ -6690,6 +6689,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import {addEventThunk, deleteEventThunk, hideForm } from '../store/event';
+
 
 var Form = function (_Component) {
   _inherits(Form, _Component);
@@ -6706,7 +6707,7 @@ var Form = function (_Component) {
       var end = e.target.end.value;
 
       _this.props.addEventThunk(title, _this.props.date, start, end);
-      _this.props.hideFormFunc();
+      _this.props.hideForm();
     };
 
     _this.state = {};
@@ -6729,7 +6730,7 @@ var Form = function (_Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                return _this2.props.hideFormFunc();
+                return _this2.props.hideForm();
               } },
             'x'
           ),
@@ -6837,10 +6838,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteEvent: function deleteEvent(id) {
       dispatch((0, _event.deleteEventThunk)(id));
-    },
-    hideFormFunc: function hideFormFunc() {
-      dispatch((0, _event.hideForm)());
     }
+    // hideFormFunc: function(){
+    //   dispatch(hideForm())
+    // }
   };
 };
 
@@ -21349,20 +21350,20 @@ var Day = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Day.__proto__ || Object.getPrototypeOf(Day)).call(this, props));
 
+    _this.showForm = function () {
+      _this.setState({ showForm: true });
+    };
+
+    _this.hideForm = function () {
+      _this.setState({ showForm: false });
+      console.log("HIT HIDEFORM");
+    };
+
     _this.state = {
-      showForm: _this.props.showForm
+      showForm: false
     };
     return _this;
   }
-
-  // showForm = () => {
-  //   this.setState({showForm: true})
-  // }
-  // hideForm = () => {
-  //   this.setState({showForm: false})
-  //   console.log("HIT HIDEFORM")
-  // }
-
 
   _createClass(Day, [{
     key: 'render',
@@ -21381,7 +21382,7 @@ var Day = function (_Component) {
         return _react2.default.createElement(
           'div',
           { className: 'day-container', onClick: function onClick() {
-              return _this2.props.showFormFunc();
+              return _this2.showForm();
             } },
           _react2.default.createElement(
             'h3',
@@ -21394,7 +21395,7 @@ var Day = function (_Component) {
             events.push(eventObj);
             return _react2.default.createElement(_SingleEvent2.default, { key: idx, event: eventObj });
           }),
-          this.state.showForm && _react2.default.createElement(_Form2.default, { date: date, events: events })
+          this.state.showForm && _react2.default.createElement(_Form2.default, { date: date, events: events, hideForm: this.hideForm })
         );
       } else {
         return null;
